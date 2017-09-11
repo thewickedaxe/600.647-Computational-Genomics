@@ -20,6 +20,7 @@ def read_input_data():
     global input_string
     file_handle = open(input_file, 'r')
     input_string = file_handle.read()
+    input_string = input_string.strip()
 
 
 def process_data():
@@ -31,7 +32,8 @@ def process_data():
     output_string = ""
     for nucelotide in input_string:
         output_string = output_string + COMPLEMENT_MAP[nucelotide]
-    print output_string
+    with open(output_file, 'w') as outfile:
+        outfile.write(str(output_string) + "\n")
 
 def main():
     read_input_data()

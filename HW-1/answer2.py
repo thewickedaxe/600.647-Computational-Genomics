@@ -20,14 +20,15 @@ def read_input_data():
     global input_string
     file_handle = open(input_file, 'r')
     input_string = file_handle.read()
+    input_string = input_string.strip()
 
 
 def process_data():
     """
         Processes input data
     """
-    print input_string
-    print input_string.replace(THYMINE, UNKNOWNSINE)
+    with open(output_file, 'w') as outfile:
+        outfile.write(str(input_string.replace(THYMINE, UNKNOWNSINE)) + "\n")
 
 
 def main():
