@@ -34,19 +34,19 @@ def query_index(p, t, index):
 
 # ************* Boilerplate Ends*************
 
-text = ""
+sequence = ""
 patterns = []
 mer_index = None
 
 
-def read_text():
+def read_sequence():
     """
     Reads the shakespeare file.
     :return: None
     """
-    global text
+    global sequence
     file_handle = open("complete_works.txt", 'r')
-    text = file_handle.read()
+    sequence = file_handle.read()
 
 
 def build_index():
@@ -54,8 +54,8 @@ def build_index():
     Builds the substr index.
     :return: None
     """
-    global text, mer_index
-    mer_index = Index(text, 6)
+    global sequence, mer_index
+    mer_index = Index(sequence, 6)
 
 
 def get_patterns():
@@ -70,12 +70,12 @@ def get_patterns():
 
 def find_exact_match_count(pattern):
     """
-    Find the number of exact matches in the text.
+    Find the number of exact matches in the sequence.
     :param pattern: the pattern to match
     :return: None
     """
-    global text, mer_index
-    return len(query_index(pattern, text, mer_index))
+    global sequence, mer_index
+    return len(query_index(pattern, sequence, mer_index))
 
 
 def hamming_dist(str1, str2):
@@ -97,22 +97,22 @@ def find_approx_match(pattern):
     Finds an approx match with hamming distance
     :return: None 
     """
-    global mer_index, text
+    global mer_index, sequence
     first_half, second_half = pattern[:len(pattern) / 2], pattern[len(pattern) / 2:]
     match_locations = set()
-    first_match_locations = query_index(first_half, text, mer_index)
-    second_match_locations = query_index(second_half, text, mer_index)
+    first_match_locations = query_index(first_half, sequence, mer_index)
+    second_match_locations = query_index(second_half, sequence, mer_index)
 
     # First half
     for location in first_match_locations:
         if hamming_dist(second_half,
-                        text[location + len(first_half):location + len(first_half) + len(second_half)]) == 1:
+                        sequence[location + len(first_half):location + len(first_half) + len(second_half)]) == 1:
             match_locations.add(location)
 
     # Second half
     for location in second_match_locations:
         if hamming_dist(first_half,
-                        text[location - len(first_half): location]) == 1:
+                        sequence[location - len(first_half): location]) == 1:
             match_locations.add(location - len(first_half))
 
     return len(match_locations)
@@ -126,11 +126,12 @@ def calc_specificity(exact_match_count, approx_match_count, pattern):
     :param pattern: the apttern
     :return: the specificity
     """
-    global mer_index, text
+    global mer_index, sequence
     first_half, second_half = pattern[:len(pattern) / 2], pattern[len(pattern) / 2:]
-    first_match_locations = query_index(first_half, text, mer_index)
-    second_match_locations = query_index(second_half, text, mer_index)
-    index_hits = set()
+    first_match_locations = query_index(first_half, sequence, mer_index)
+    second_match_locations = query_index(second_half, sequence, mer_index)
+    index_hits = float((len(first_match_locations) + len(second_match_locations)))
+    specificity = float((exact_match_count + approx_match_count)) / index_hits
     return specificity
 
 
@@ -152,7 +153,7 @@ def main():
     Main Sentinel.
     :return: None
     """
-    read_text()
+    read_sequence()
     get_patterns()
     build_index()
     print_output()

@@ -14,6 +14,7 @@ Srinivas Suresh
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{color}
+\usepackage{multirow}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -46,38 +47,64 @@ Some answers are instructions on how to run the associated program
     \begin{enumerate}[label=(\alph*)]
             \item Yes, the sequencer could not determine the 67th nucleotide quite often in every read
             \item
-            \includegraphics[scale=0.651]{trend.png} 
-            \\There appears to be an increase in bases with $Q < 20$ as the index increases. This tells me that the 
+            \includegraphics[scale=0.651]{trend.png}
+            \\There appears to be an increase in bases with $Q < 20$ as the index increases. This tells me that the
             longer the sequence the lower the quality of bases at the end
-            
-        
+
+
     \end{enumerate}
     \item Winner indicated in \textbf{Bold}
     \begin{enumerate}[label=(\alph*)]
-        \item 
+        \item
         Bad Character Rule: 2 moves, 1 skip
          \\ \textbf{Good Suffix Rule: 8 moves, 7 skips}
         \item
         \textbf{Bad Character Rule: 8 moves, 7 skips}
         \\ Good Suffix Rule: 4 moves, 3 skips
         \item
-        Bad Character Rule: 5 moves, 4 skip 
+        Bad Character Rule: 5 moves, 4 skip
         \\ \textbf{Good Suffix Rule: 10 moves, 9 skips}
     \end{enumerate}
     \item Winner indicated in \textbf{Bold}, the answer for case b changes
     \begin{enumerate}[label=(\alph*)]
-        \item 
+        \item
         Bad Character Rule: 2 moves, 1 skip
          \\ \textbf{Good Suffix Rule: 8 moves, 7 skips}
         \item
         \textbf{Bad Character Rule: 8 moves, 7 skips}
         \\ \textbf{Good Suffix Rule: 8 moves, 7 skips}
         \item
-        Bad Character Rule: 2 moves, 1 skips 
-        \\ \textbf{Good Suffix Rule: 11 moves, 10 skips}
+        Bad Character Rule: 2 moves, 1 skips
+        \\ \textbf{Good Suffix Rule: 10 moves, 9 skips}
     \end{enumerate}.
-    \item Send a pattern in via stdin, ensure complete works file is in same dir is in the same dir To run, call 
-    \textit{answer4.py $<$pattern$>$}
+    \item Send a pattern in via stdin, ensure complete works file is in same dir is in the same dir To run, call
+    \textit{answer4.py $<$pattern\_file} \\ \\
+    The data for the provided patterns was as follows \\
+    \begin{flushleft}
+        \begin{tabular}{ |c|c|c|c| }
+        \hline
+        \textbf{Word} & \textbf{Exact} & \textbf{1-Mismatch} & \textbf{Specificity} \\
+        \hline
+        achievements & 3 & 3 & 0.0582 \\
+        acquaintance & 36 & 0 & 0.2608 \\
+        remembrances & 5 & 64 & 0.2584 \\
+        \hline
+        \end{tabular}
+        \end{flushleft}
+    \item Send a pattern in via stdin, ensure complete works file is in same dir is in the same dir To run, call
+        \textit{answer5.py $<$pattern\_file} \\ \\
+        The data for the provided patterns was as follows \\
+        \begin{flushleft}
+            \begin{tabular}{ |c|c|c|c| }
+            \hline
+            \textbf{Word} & \textbf{Exact} & \textbf{1-Mismatch} & \textbf{Specificity} \\
+            \hline
+            achievements & 3 & 3 & 0.667 \\
+            acquaintance & 36 & 0 & 0.5 \\
+            remembrances & 5 & 64 & 0.9324 \\
+            \hline
+            \end{tabular}
+            \end{flushleft}
 \end{enumerate}
 
 \bibliographystyle{abbrv}
